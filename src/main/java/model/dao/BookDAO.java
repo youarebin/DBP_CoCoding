@@ -213,7 +213,7 @@ public class BookDAO {
         return null;
     }
 
-    // ResultSet의 현재 행을 Book 객체로 매핑하는 헬퍼 메서드
+    // ResultSet의 현재 행을 Book 객체로 매핑
     private Book mapRowToBook(ResultSet rs) throws SQLException {
         Book book = new Book();
         book.setBookId(rs.getInt("bookId"));
