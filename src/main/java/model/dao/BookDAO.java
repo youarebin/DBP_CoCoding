@@ -110,5 +110,120 @@ public class BookDAO {
         }
         return null;
     }
-    
+
+    // 검색어로 책 리스트 반환
+    public List<Book> searchBook(String keyword) {
+        String query = "SELECT * FROM Book WHERE bookTitle LIKE ? OR category LIKE ? OR author LIKE ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{"%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%"});
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            List<Book> bookList = new ArrayList<>();
+            while (rs.next()) {
+                Book book = mapRowToBook(rs);
+                bookList.add(book);
+            }
+            return bookList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+
+    // 특정 bookId로 책 정보 반환
+    public Book getBookInfo(int bookId) {
+        String query = "SELECT * FROM Book WHERE bookId = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{bookId});
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                return mapRowToBook(rs);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+
+    // 가격 범위에 따라 책 리스트 반환
+    public List<Book> getBookListByPrice(int minPrice, int maxPrice) {
+        String query = "SELECT * FROM Book JOIN Registration ON Book.bookId = Registration.bookId WHERE desiredPrice BETWEEN ? AND ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{minPrice, maxPrice});
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            List<Book> bookList = new ArrayList<>();
+            while (rs.next()) {
+                Book book = mapRowToBook(rs);
+                bookList.add(book);
+            }
+            return bookList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+
+    // 지역에 따라 책 리스트 반환
+    public List<Book> getBookListByLocation(String location) {
+        String query = "SELECT * FROM Book JOIN Registration ON Book.bookId = Registration.bookId WHERE desiredLocation = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{location});
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            List<Book> bookList = new ArrayList<>();
+            while (rs.next()) {
+                Book book = mapRowToBook(rs);
+                bookList.add(book);
+            }
+            return bookList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+
+    // 저자에 따라 책 리스트 반환
+    public List<Book> getBookListByAuthor(String author) {
+        String query = "SELECT * FROM Book WHERE author = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{author});
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            List<Book> bookList = new ArrayList<>();
+            while (rs.next()) {
+                Book book = mapRowToBook(rs);
+                bookList.add(book);
+            }
+            return bookList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
+    }
+
+    // ResultSet의 현재 행을 Book 객체로 매핑하는 헬퍼 메서드
+    private Book mapRowToBook(ResultSet rs) throws SQLException {
+        Book book = new Book();
+        book.setBookId(rs.getInt("bookId"));
+        book.setBookTitle(rs.getString("bookTitle"));
+        book.setCategory(rs.getString("category"));
+        book.setAuthor(rs.getString("author"));
+        book.setPublisher(rs.getString("publisher"));
+        book.setPublishedDate(rs.getString("publishedDate"));
+        book.setDescription(rs.getString("description"));
+        book.setBookImg(rs.getString("bookImg"));
+        return book;
+    }
 }
