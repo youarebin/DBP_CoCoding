@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.domain.User;
+import model.domain.Book;
 
 public class UserDAO {
     private JDBCUtil jdbcUtil = null;
@@ -95,7 +96,7 @@ public class UserDAO {
             List<Book> bookList = new ArrayList<>();
             while (rs.next()) {
                 Book book = new Book();
-                book.setBookId(rs.getString("bookId"));
+                book.setBookId(rs.getInt("bookId"));;
                 book.setBookTitle(rs.getString("bookTitle"));
                 book.setCategory(rs.getString("category"));
                 book.setAuthor(rs.getString("author"));
@@ -124,7 +125,7 @@ public class UserDAO {
             List<Book> bookList = new ArrayList<>();
             while (rs.next()) {
                 Book book = new Book();
-                book.setBookId(rs.getString("bookId"));
+                book.setBookId(rs.getInt("bookId"));
                 book.setBookTitle(rs.getString("bookTitle"));
                 book.setCategory(rs.getString("category"));
                 book.setAuthor(rs.getString("author"));
