@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.domain.Book;
+import model.domain.RegistrationEntity;
 
 public class BookDAO {
     private JDBCUtil jdbcUtil = null;
@@ -15,11 +16,11 @@ public class BookDAO {
     }
     
     // 책 등록
-    public int create(Book book) throws SQLException {
+    public int create(RegistrationEntity book) throws SQLException {
         String sql = "INSERT INTO Book VALUES (?, ?, ?, ?, ?, ?)";      
-        Object[] param = new Object[] {book.getBookId(), book.getBookTitle(), 
-                book.getCategory(), book.getAuthor(), book.getPublisher(), book.getPublishDate(),
-                book.getDescription(), book.getBookImg() };              
+        Object[] param = new Object[] {book.getBookId(), book.getCustomerId(), 
+                book.getBookImg(), book.getPublisher(), book.getCategory(), book.getRegistrationDate(),
+                book.getDesiredLocation(), book.getUsagePeriod(), book.getDesiredPrice() };              
         jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil 에 insert문과 매개 변수 설정
                         
         try {               
@@ -42,7 +43,7 @@ public class BookDAO {
                 + "WHERE bookid=?";
         Object[] param = new Object[] {
                 book.getBookTitle(), book.getCategory(), book.getAuthor(), book.getPublisher(),
-                book.getPublishDate(), book.getDescription(), book.getBookImg(),
+                book.getPublishedDate(), book.getDescription(), book.getBookImg(),
                 book.getBookId()        
         };              
         jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil에 update문과 매개 변수 설정
@@ -91,7 +92,7 @@ public class BookDAO {
             
             while (rs.next()) {
                 Book book = new Book(           // Book 객체를 생성하여 현재 행의 정보를 저장
-                    rs.getString("bookId"),
+                    rs.getInt("bookId"),
                     rs.getString("bookTitle"),
                     rs.getString("category"),
                     rs.getString("author"),
