@@ -20,12 +20,32 @@
 	<table>
 		<tr>
 			<td>책 사진</td>
-			<td></td>
+			<td>
+				<input type="file" name="bookImg" />
+			</td>
+		</tr>
+		<tr>
+			<td>책 제목</td>
+			<td>
+				<input type="text" name="bookTitle" />
+			</td>
+		</tr>
+		<tr>
+			<td>저자</td>
+			<td>
+				<input type="text" name="author" />
+			</td>
 		</tr>
 		<tr>
 			<td>출판사</td>
 			<td>
 				<input type="text" name="publisher"/>
+			</td>
+		</tr>
+		<tr>
+			<td>출판일</td>
+			<td>
+				<input type="date" name="publishedDate"/>
 			</td>
 		</tr>
 		<tr>
@@ -37,11 +57,13 @@
 		<tr>
 			<td>카테고리</td>
 			<td>
-			<select>
-				<option>수학</option>
-				<option>컴퓨터</option>
-				<option>소설</option>
-				<option>만화</option>
+			<select name="category">
+				<option value="철학">철학</option>
+				<option value="종교">종교</option>
+				<option value="사회과학">사회과학</option>
+				<option value="순수과학">순수과학</option>
+				<option value="기술과학">기술과학</option>
+				<option value="예술">예술</option>
 			</select>
 			</td>
 		</tr>
