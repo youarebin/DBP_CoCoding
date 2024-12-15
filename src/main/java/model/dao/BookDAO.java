@@ -16,25 +16,51 @@ public class BookDAO {
     }
     
     // 책 등록
-    public int create(RegistrationEntity book) throws SQLException {
-        String sql = "INSERT INTO Book VALUES (?, ?, ?, ?, ?, ?)";      
-        Object[] param = new Object[] {book.getBookId(), book.getCustomerId(), 
-                book.getBookImg(), book.getPublisher(), book.getCategory(), book.getRegistrationDate(),
-                book.getDesiredLocation(), book.getUsagePeriod(), book.getDesiredPrice() };              
-        jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil 에 insert문과 매개 변수 설정
-                        
-        try {               
-            int result = jdbcUtil.executeUpdate();  // insert 문 실행
-            return result;
+    public int create(Book book, RegistrationEntity registration) throws SQLException {
+        int result = 0;
+
+        try {
+            // Book 테이블에 삽입
+            String bookSql = "INSERT INTO Book (bookId, bookTitle, category, author, publisher, publishedDate, description, bookImg) "
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            Object[] bookParams = new Object[] {
+                book.getBookId(),
+                book.getBookTitle(),
+                book.getCategory(),
+                book.getAuthor(),
+                book.getPublisher(),
+                book.getPublishedDate(),
+                book.getDescription(),
+                book.getBookImg()
+            };
+            jdbcUtil.setSqlAndParameters(bookSql, bookParams); // Book SQL 설정
+            result += jdbcUtil.executeUpdate(); // Book 테이블 삽입 실행
+
+            // Registration 테이블에 삽입
+            String registrationSql = "INSERT INTO Registration (bookId, customerId, registrationDate, desiredLocation, usagePeriod, desiredPrice) "
+                                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            Object[] registrationParams = new Object[] {
+                book.getBookId(), // bookId는 Book 객체에서 가져옴
+                registration.getCustomerId(),
+                registration.getRegistrationDate(),
+                registration.getDesiredLocation(),
+                registration.getUsagePeriod(),
+                registration.getDesiredPrice()
+            };
+            jdbcUtil.setSqlAndParameters(registrationSql, registrationParams); // Registration SQL 설정
+            result += jdbcUtil.executeUpdate(); // Registration 테이블 삽입 실행
+
+            jdbcUtil.commit(); // 트랜잭션 커밋
         } catch (Exception ex) {
-            jdbcUtil.rollback();
+            jdbcUtil.rollback(); // 트랜잭션 롤백
             ex.printStackTrace();
-        } finally {     
-            jdbcUtil.commit();
-            jdbcUtil.close();   // resource 반환
-        }       
-        return 0;       
+        } finally {
+            jdbcUtil.close(); // 자원 반환
+        }
+
+        return result; // 삽입 결과 반환
     }
+
     
     //책 정보 수정
     public int update(Book book) throws SQLException { 
