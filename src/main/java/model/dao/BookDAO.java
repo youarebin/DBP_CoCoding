@@ -4,9 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import model.domain.Book;
-import model.domain.RegistrationEntity;
+import model.domain.BookApplicant;
 
 public class BookDAO {
     private JDBCUtil jdbcUtil = null;
@@ -16,13 +17,14 @@ public class BookDAO {
     }
     
     // 책 등록
-    public int create(Book book, RegistrationEntity registration) throws SQLException {
+    public int create(Book book) throws SQLException {
         int result = 0;
 
         try {
             // Book 테이블에 삽입
-            String bookSql = "INSERT INTO Book (bookId, bookTitle, category, author, publisher, publishedDate, description, bookImg) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Book (bookId, bookTitle, category, author, publisher, publishedDate, "
+                    + "bookImg, customerId, desiredLocation, desiredPrice, usagePeriod) "
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             Object[] bookParams = new Object[] {
                 book.getBookId(),
                 book.getBookTitle(),
@@ -30,31 +32,19 @@ public class BookDAO {
                 book.getAuthor(),
                 book.getPublisher(),
                 book.getPublishedDate(),
-                book.getDescription(),
-                book.getBookImg()
+                book.getBookImg(),
+                book.getCustomerId(),
+                book.getDesiredLocation(),
+                book.getDesiredPrice(),
+                book.getUsagePeriod()
             };
-            jdbcUtil.setSqlAndParameters(bookSql, bookParams); // Book SQL 설정
-            result += jdbcUtil.executeUpdate(); // Book 테이블 삽입 실행
-
-            // Registration 테이블에 삽입
-            String registrationSql = "INSERT INTO Registration (bookId, customerId, registrationDate, desiredLocation, usagePeriod, desiredPrice) "
-                                    + "VALUES (?, ?, ?, ?, ?, ?)";
-            Object[] registrationParams = new Object[] {
-                book.getBookId(), // bookId는 Book 객체에서 가져옴
-                registration.getCustomerId(),
-                registration.getRegistrationDate(),
-                registration.getDesiredLocation(),
-                registration.getUsagePeriod(),
-                registration.getDesiredPrice()
-            };
-            jdbcUtil.setSqlAndParameters(registrationSql, registrationParams); // Registration SQL 설정
-            result += jdbcUtil.executeUpdate(); // Registration 테이블 삽입 실행
-
-            jdbcUtil.commit(); // 트랜잭션 커밋
+            jdbcUtil.setSqlAndParameters(sql, bookParams); // Book SQL 설정
+            result = jdbcUtil.executeUpdate(); // Book 테이블 삽입 실행
         } catch (Exception ex) {
             jdbcUtil.rollback(); // 트랜잭션 롤백
             ex.printStackTrace();
         } finally {
+            jdbcUtil.commit(); // 트랜잭션 커밋
             jdbcUtil.close(); // 자원 반환
         }
 
@@ -65,11 +55,11 @@ public class BookDAO {
     //책 정보 수정
     public int update(Book book) throws SQLException { 
         String sql = "UPDATE Book "
-                + "SET bookTitle=?, category=?, author=?, publisher=?, publishedDate=?, description=?, bookImg=? "
+                + "SET bookTitle=?, category=?, author=?, publisher=?, publishedDate=?, bookImg=? "
                 + "WHERE bookid=?";
         Object[] param = new Object[] {
                 book.getBookTitle(), book.getCategory(), book.getAuthor(), book.getPublisher(),
-                book.getPublishedDate(), book.getDescription(), book.getBookImg(),
+                book.getPublishedDate(), book.getBookImg(),
                 book.getBookId()        
         };              
         jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil에 update문과 매개 변수 설정
@@ -123,9 +113,12 @@ public class BookDAO {
                     rs.getString("category"),
                     rs.getString("author"),
                     rs.getString("publisher"),
-                    rs.getString("publishedDate"),
-                    rs.getString("description"),
-                    rs.getString("bookImg") );
+                    rs.getDate("publishedDate"), 
+                    rs.getString("bookImg"),
+                    rs.getInt("customerId"),
+                    rs.getString("desiredLocation"),
+                    rs.getString("desiredPrice"),
+                    rs.getString("usagePeriod") );
                 bookList.add(book);             // List에 Book 객체 저장
             }       
             return bookList;                    
@@ -239,6 +232,40 @@ public class BookDAO {
         }
         return null;
     }
+    
+    // 책 신청자 등록
+    public int insertApplicant(BookApplicant applicant) {
+        int result = 0;
+        
+        try {
+            String sql = "INSERT INTO BookApplicant (bookId, customerId, name, email, "
+                    + "applicationDate, desiredPrice, desiredLocation, description) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
+            
+            Object[] params = new Object[] {
+                    applicant.getBookId(),
+                    applicant.getCustomerId(),
+                    applicant.getName(),
+                    applicant.getEmail(),
+                    applicant.getApplicationDate(),
+                    applicant.getDesiredPrice(),
+                    applicant.getDesiredLocation(),
+                    applicant.getDescription()
+            };
+            
+            jdbcUtil.setSqlAndParameters(sql, params); // SQL 설정
+            result = jdbcUtil.executeUpdate(); // 실행
+            
+        } catch (Exception ex) {
+            jdbcUtil.rollback(); // 트랜잭션 롤백
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit(); // 트랜잭션 커밋
+            jdbcUtil.close(); // 자원 반환
+        }
+
+        return result;
+    }
 
     // ResultSet의 현재 행을 Book 객체로 매핑
     private Book mapRowToBook(ResultSet rs) throws SQLException {
@@ -248,8 +275,7 @@ public class BookDAO {
         book.setCategory(rs.getString("category"));
         book.setAuthor(rs.getString("author"));
         book.setPublisher(rs.getString("publisher"));
-        book.setPublishedDate(rs.getString("publishedDate"));
-        book.setDescription(rs.getString("description"));
+        book.setPublishedDate(rs.getDate("publishedDate"));
         book.setBookImg(rs.getString("bookImg"));
         return book;
     }
