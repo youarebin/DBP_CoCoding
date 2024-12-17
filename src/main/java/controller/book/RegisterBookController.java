@@ -4,10 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 import controller.Controller;
 import model.dao.BookDAO;
 import model.domain.Book;
-import model.domain.RegistrationEntity;
 
 public class RegisterBookController implements Controller {
     @Override
@@ -23,30 +25,33 @@ public class RegisterBookController implements Controller {
         
         try {
             Book book = new Book();
+            
             book.setBookTitle(request.getParameter("bookTitle"));
             book.setCategory(request.getParameter("category"));
             book.setAuthor(request.getParameter("author")); 
             book.setPublisher(request.getParameter("publisher"));
-            book.setPublishedDate(request.getParameter("publishedDate"));
-            book.setDescription(request.getParameter("description"));
+            
+            // publishedDate 문자열을 Date 타입으로 변환
+            String publishedDateStr = request.getParameter("publishedDate");
+            if (publishedDateStr != null && !publishedDateStr.isEmpty()) {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date publishedDate = formatter.parse(publishedDateStr);
+                book.setPublishedDate(publishedDate);
+            }
+            
             book.setBookImg(request.getParameter("bookImg")); 
-
-            // RegistrationEntity 정보 생성
-            RegistrationEntity registration = new RegistrationEntity();
-            registration.setCustomerId(customerId); // 세션에서 가져온 사용자 ID
-            registration.setRegistrationDate(request.getParameter("registrationDate")); // 폼에 추가 필요
-            registration.setDesiredLocation(request.getParameter("desiredLocation"));
-            registration.setUsagePeriod(request.getParameter("usagePeriod"));
-            registration.setDesiredPrice(request.getParameter("desiredPrice"));
+            book.setDesiredLocation(request.getParameter("desiredLocation"));
+            book.setDesiredPrice(request.getParameter("desiredPrice"));
+            book.setUsagePeriod(request.getParameter("usagePeriod"));
             
             BookDAO bookDAO = new BookDAO();
-            int result = bookDAO.create(book, registration);
+            int result = bookDAO.create(book);
             
-            if (result > 0) {
-                return "redirect:/user/myPage"; // 성공 시 마이페이지로 리다이렉트
-            } else {
+            if (result > 0) { // 성공 시 마이페이지로 리다이렉트
+                return "redirect:/user/myPage"; 
+            } else { // 실패 시 등록 폼으로 돌아감
                 request.setAttribute("error", "책 등록에 실패했습니다.");
-                return "/book/BookRegisterForm.jsp"; // 실패 시 등록 폼으로 돌아감
+                return "/book/BookRegisterForm.jsp"; 
             }
             
         } catch (Exception e) {
