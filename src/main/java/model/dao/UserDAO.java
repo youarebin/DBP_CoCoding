@@ -101,8 +101,7 @@ public class UserDAO {
                 book.setCategory(rs.getString("category"));
                 book.setAuthor(rs.getString("author"));
                 book.setPublisher(rs.getString("publisher"));
-                book.setPublishedDate(rs.getString("publishedDate"));
-                book.setDescription(rs.getString("description"));
+                book.setPublishedDate(rs.getDate("publishedDate"));
                 book.setBookImg(rs.getString("bookImg"));
                 bookList.add(book);
             }
@@ -130,8 +129,7 @@ public class UserDAO {
                 book.setCategory(rs.getString("category"));
                 book.setAuthor(rs.getString("author"));
                 book.setPublisher(rs.getString("publisher"));
-                book.setPublishedDate(rs.getString("publishedDate"));
-                book.setDescription(rs.getString("description"));
+                book.setPublishedDate(rs.getDate("publishedDate"));
                 book.setBookImg(rs.getString("bookImg"));
                 bookList.add(book);
             }
