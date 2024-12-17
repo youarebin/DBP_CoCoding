@@ -1,27 +1,37 @@
 package model.domain;
 
+import java.util.Date;
+
 public class Book {
     private int bookId;
     private String bookTitle;
     private String category;
     private String author;
     private String publisher;
-    private String publishedDate;
-    private String description;
+    private Date publishedDate;
     private String bookImg;
+    private int customerId;
+    private String desiredLocation;
+    private String desiredPrice;
+    private String usagePeriod;
     
     public Book() { }
     
-    // 소속 대학, 사용감도 추가하면 어떨지?
-    public Book(int bookId, String bookTitle, String category, String author, String publisher, String publishedDate, String description, String bookImg) {
+    public Book(int bookId, String bookTitle, String category, String author, String publisher,
+            Date publishedDate, String bookImg, int customerId, String desiredLocation, String desiredPrice,
+            String usagePeriod) {
+        super();
         this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.category = category;
         this.author = author;
         this.publisher = publisher;
         this.publishedDate = publishedDate;
-        this.description = description;
         this.bookImg = bookImg;
+        this.customerId = customerId;
+        this.desiredLocation = desiredLocation;
+        this.desiredPrice = desiredPrice;
+        this.usagePeriod = usagePeriod;
     }
 
     public int getBookId() {
@@ -30,6 +40,14 @@ public class Book {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getBookTitle() {
@@ -64,20 +82,12 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public String getPublishedDate() {
+    public Date getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(String publishedDate) {
+    public void setPublishedDate(Date publishedDate) {
         this.publishedDate = publishedDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getBookImg() {
@@ -87,6 +97,32 @@ public class Book {
     public void setBookImg(String bookImg) {
         this.bookImg = bookImg;
     }
+
+    public String getDesiredLocation() {
+        return desiredLocation;
+    }
+
+    public void setDesiredLocation(String desiredLocation) {
+        this.desiredLocation = desiredLocation;
+    }
+
+    public String getDesiredPrice() {
+        return desiredPrice;
+    }
+
+    public void setDesiredPrice(String desiredPrice) {
+        this.desiredPrice = desiredPrice;
+    }
+
+    public String getUsagePeriod() {
+        return usagePeriod;
+    }
+
+    public void setUsagePeriod(String usagePeriod) {
+        this.usagePeriod = usagePeriod;
+    }
+    
+    
     
     
 }
