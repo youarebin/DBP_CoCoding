@@ -33,7 +33,7 @@
 		<tr>
 			<td>제시 가격</td>
 			<td>
-				<input type="text" name="price" />
+				<input type="text" name="desiredPrice" />
 			</td>
 		</tr>
 		<tr>
@@ -45,7 +45,7 @@
 		<tr>
 			<td>기타</td>
 			<td>
-				<textarea name="etc" rows="4" cols="50" maxlength="200"></textarea>
+				<textarea name="description" rows="4" cols="50" maxlength="200"></textarea>
 			</td>
 		</tr>
 	</table>
