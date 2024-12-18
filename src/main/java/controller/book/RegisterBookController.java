@@ -57,7 +57,7 @@ public class RegisterBookController implements Controller {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "오류가 발생했습니다: " + e.getMessage());
-            return "/book/registerForm.jsp";
+            return "/book/BookRegisterForm.jsp";
         }
         
     }
