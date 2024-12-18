@@ -16,9 +16,17 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
+        
         //책 등록 폼 요청 request URI 추가
         mappings.put("/book/register/form", new ForwardController("/book/BookRegisterForm.jsp"));
         mappings.put("/book/register", new RegisterBookController());
+        
+        //책 신청 폼 요청 request URI 추가
+        mappings.put("/book/apply/form", new ForwardController("/book/BookApplyForm.jsp"));
+        mappings.put("/book/apply", new ApplyBookController());
+        
+        //책 리스트 페이지 request URI 추가
+        mappings.put("/book/list", new ListBookController());
         
         logger.info("Initialized Request Mapping!");
     }
