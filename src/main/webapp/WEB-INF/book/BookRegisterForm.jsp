@@ -6,15 +6,75 @@
 <title>책 등록 폼</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/bookRegister.css' />" type="text/css">
+<script>
+function bookCreate() {
+	if(form.bookImg.value == "") {
+		alert("이미지를 등록하세요");
+		form.bookImg.focus();
+		return false;
+	}
+	if(form.bookTitle.value == "") {
+		alert("책 제목을 입력해주세요");
+		form.bookTitle.focus();
+		return false;
+	}
+	if(form.author.value == "") {
+		alert("저자를 입력해주세요");
+		form.author.focus();
+		return false;
+	}
+	if(form.publisher.value == "") {
+		alert("출판사를 입력해주세요");
+		form.publisher.focus();
+		return false;
+	}
+	if(form.publishedDate.value == "") {
+		alert("출판일을 입력해주세요");
+		form.publishedDate.focus();
+		return false;
+	}
+	if(form.usagePeriod.value == "") {
+		alert("사용기간을 입력해주세요");
+		form.usagePeriod.focus();
+		return false;
+	}
+	if(form.category.value == "") {
+		alert("카테고리를 선택해주세요");
+		form.category.focus();
+		return false;
+	}
+	if(form.desiredLocation.value == "") {
+		alert("거래 희망 장소를 입력해주세요");
+		form.desiredLocation.focus();
+		return false;
+	}
+	if(form.desiredPrice.value == "") {
+		alert("희망 가격을 입력해주세요");
+		form.desiredPrice.focus();
+		return false;
+	}
+	
+	form.submit();
+}
+</script>
 </head>
 <body>
-<nav class="header">
-	<a>">Main</a>
-	<a>">Book</a>
-	<a>">SignUp</a>
-	<a>">Login</a>
-	<a>">MyPage</a>
-</nav>
+<header>
+	<nav>
+		<ul class="header">
+			<div class="left">
+				<li><a href="index.html">Main</a></li>
+				<li><a href="itemlist.html">BookList</a></li>
+            </div>
+			<div class="right">
+				<li><a href="signup.html">SignUp</a></li>
+				<li><a href="login.html">Login</a></li>
+				<li><a href="login.html">MyPage</a></li>
+				
+			</div>
+		</ul>
+	</nav>
+</header>
 <form name="form" method="POST" action="<c:url value='/book/register' />">
 	<h2>책 등록 폼</h2>
 	<table>
@@ -80,9 +140,9 @@
 			</td>
 		</tr>
 	</table>
-	<div>
+	<div class="buttonWrapper">
 		<input type="button" value="취소" />
-		<input type="button" value="등록" />
+		<input type="button" value="등록" onClick="bookCreate()" />
 	</div>
 </form>
 </body>
