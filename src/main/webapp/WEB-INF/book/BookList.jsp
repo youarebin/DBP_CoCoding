@@ -7,14 +7,24 @@
 <link rel=stylesheet href="<c:url value='/css/bookList.css' />" type="text/css">
 </head>
 <body>
-<nav class="header">
-	<a>">Main</a>
-	<a>">Book</a>
-	<a>">SignUp</a>
-	<a>">Login</a>
-	<a>">MyPage</a>
-</nav>
+<header>
+	<nav>
+		<ul class="header">
+			<div class="left">
+				<li><a href="index.html">Main</a></li>
+				<li><a href="itemlist.html">BookList</a></li>
+            </div>
+			<div class="right">
+				<li><a href="signup.html">SignUp</a></li>
+				<li><a href="login.html">Login</a></li>
+				<li><a href="login.html">MyPage</a></li>
+				
+			</div>
+		</ul>
+	</nav>
+</header>
 <!-- 책 리스트 출력 -->
+<div class="book-list-wrapper">
 <c:forEach var="book" items="${bookList}">
 	<div class="book-item">
 		<img src="${book.bookImg}" alt="${book.bookTitle}" />
@@ -23,5 +33,6 @@
 		<p>카테고리: ${book.category }</p>
 	</div>
 </c:forEach>
+</div>
 </body>
 </html>
