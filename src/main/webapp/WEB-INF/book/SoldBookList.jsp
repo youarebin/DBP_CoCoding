@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<nav class="header">
+	<a>">Main</a>
+	<a>">Book</a>
+	<a>">SignUp</a>
+	<a>">Login</a>
+	<a>">MyPage</a>
+</nav>
 <header>
     <h2>판매한 책 리스트</h2>
 </header>
