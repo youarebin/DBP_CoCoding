@@ -8,6 +8,7 @@ body {
 	align-items: center; /* 수직 중앙 정렬 */
 	height: 100vh; /* 화면 전체 높이 */
 	box-sizing: border-box;
+	padding-top: 80px;
 }
 
 header {
@@ -57,27 +58,45 @@ nav a:hover {
 
 /*책 리스트 css*/
 .book-list-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 3%;
     padding: 20px;
-	width: 500px;
+    
+    a {
+    	text-decoration: none;
+		color: inherit;
+    }
 }
 
 .book-item {
     width: 250px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    height: 350px;
+    border: 1px solid #FF7012;
     border-radius: 10px;
     padding: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
 }
 
 .book-item img {
     width: 100%;
-    height: auto;
-    border-radius: 5px;
+    height: 200px;
+    border: 1px solid #FF7012;
+    border-radius: 10px;
+}
+
+.item-content {
+	padding: 10px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.book-info-bold {
+	font-weight: bold;
 }
 
 
