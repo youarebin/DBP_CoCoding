@@ -24,7 +24,6 @@
     <div class="details">
         <h2>${book.title}</h2>
         <p>출판사: ${book.publisher}</p>
-        <!-- 판매 중임을 확인하는 로직 추가 -->
         <c:if test="${user.id == book.sellerId}">
             <form action="ApplicantsList.jsp" method="get">
                 <input type="submit" value="신청자리스트" />
