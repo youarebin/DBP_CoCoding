@@ -1,0 +1,120 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* 수평 중앙 정렬 */
+	align-items: center; /* 수직 중앙 정렬 */
+	height: 100vh; /* 화면 전체 높이 */
+	box-sizing: border-box;
+	padding-top: 80px;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #FF7012;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    padding: 20px 5%;
+}
+
+ul.header {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    gap: 40px;
+}
+
+.left li, .right li {
+    display: inline-block;
+}
+
+.left a, .right a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+/*body css*/
+#container {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	gap: 50px;
+}
+
+.btnWrapper {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+
+	/* 각 버튼 스타일 */
+.btn1 {
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	background-color: #FF7012;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn1:hover {
+	background-color: #FF9436;
+}
+
+.transactionTitle {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.btnWrapper2 {
+	display: flex;
+	justify-content: space-around;
+	gap: 30px;
+}
+	
+.btn2 {
+	padding: 10px 25px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ED4C00 ;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn2:hover {
+	background-color: #FF9436;
+}

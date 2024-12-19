@@ -1,0 +1,129 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* 수평 중앙 정렬 */
+	align-items: center; /* 수직 중앙 정렬 */
+	height: 100vh; /* 화면 전체 높이 */
+	box-sizing: border-box;
+	padding-top: 80px;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #FF7012;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    padding: 20px 5%;
+}
+
+ul.header {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    gap: 40px;
+}
+
+.left li, .right li {
+    display: inline-block;
+}
+
+.left a, .right a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+/*수정 폼 css*/
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 500px;
+}
+
+form table {
+  width: 100%;
+}
+
+form table td {
+  padding: 10px 0; /* 각 td 안에 간격 추가 */
+}
+
+form table 
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #FF7012;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.price-input {
+    display: flex;
+    align-items: center;
+}
+
+.price-input input {
+    width: 100px;
+    padding-right: 20px;
+}
+
+.price-input span {
+    margin-left: 5px;
+}
+
+.buttonWrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 0;
+}
+
+.buttonWrapper input{
+	margin: 0 20px;
+	background-color: #FF7012;
+	border: none;
+	border-radius: 5px;
+	width: 100px;
+	height: 40px;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.buttonWrapper input:hover {
+  background-color: #FF9436; /* 호버 시 배경 색 변화 */
+}

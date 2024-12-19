@@ -265,6 +265,74 @@ public class BookDAO {
 
         return result;
     }
+    
+    //구매한 책 리스트 가져오기
+    public List<Book> getPurchasedBookList(int customerId) {
+        String query = "SELECT b.* " +
+                       "FROM Book b " +
+                       "JOIN BookApplicant ba ON b.bookId = ba.bookId " +
+                       "WHERE ba.customerId = ?";
+
+        jdbcUtil.setSqlAndParameters(query, new Object[]{customerId});
+        
+        List<Book> purchasedBookList = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                Book book = new Book(           // Book 객체를 생성하여 현재 행의 정보를 저장
+                        rs.getInt("bookId"),
+                        rs.getString("bookTitle"),
+                        rs.getString("category"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getDate("publishedDate"), 
+                        rs.getString("bookImg"),
+                        rs.getInt("customerId"),
+                        rs.getString("desiredLocation"),
+                        rs.getString("desiredPrice"),
+                        rs.getString("usagePeriod") );
+                purchasedBookList.add(book);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // 로깅 또는 예외 처리 추가 가능
+        } finally {
+            jdbcUtil.close();
+        }
+        return purchasedBookList; // null 대신 빈 리스트 반환
+    }
+    
+    //판매(등록)한 책 리스트 가져오기
+    public List<Book> getSoldBookList(int customerId) {
+        String query = "SELECT * FROM Book WHERE customerId = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{customerId});
+
+        List<Book> soldBookList = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                Book book = new Book(           // Book 객체를 생성하여 현재 행의 정보를 저장
+                        rs.getInt("bookId"),
+                        rs.getString("bookTitle"),
+                        rs.getString("category"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getDate("publishedDate"), 
+                        rs.getString("bookImg"),
+                        rs.getInt("customerId"),
+                        rs.getString("desiredLocation"),
+                        rs.getString("desiredPrice"),
+                        rs.getString("usagePeriod") );
+                soldBookList.add(book);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // 로깅 또는 예외 처리 추가 가능
+        } finally {
+            jdbcUtil.close();
+        }
+        return soldBookList; // null 대신 빈 리스트 반환
+    }
 
     // ResultSet의 현재 행을 Book 객체로 매핑
     private Book mapRowToBook(ResultSet rs) throws SQLException {

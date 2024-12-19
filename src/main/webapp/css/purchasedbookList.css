@@ -1,0 +1,94 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* 수평 중앙 정렬 */
+	align-items: center; /* 수직 중앙 정렬 */
+	height: 100vh; /* 화면 전체 높이 */
+	box-sizing: border-box;
+	padding-top: 80px;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #FF7012;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    padding: 20px 5%;
+}
+
+ul.header {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    gap: 40px;
+}
+
+.left li, .right li {
+    display: inline-block;
+}
+
+.left a, .right a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+/*구매한 책 리스트 css*/
+h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.purchased-books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.book-item {
+    border: 1px solid #FF7012;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.2s;
+}
+
+.book-item img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.book-item p {
+    margin: 10px 0 0;
+    font-size: 16px;
+}
+
+.book-item:hover {
+    transform: scale(1.05);
+}

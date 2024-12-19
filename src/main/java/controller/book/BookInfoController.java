@@ -1,4 +1,4 @@
-package controller;
+package controller.book;
 
 import model.dao.BookDAO;
 import model.domain.Book;
