@@ -88,6 +88,20 @@ select {
     box-sizing: border-box;
 }
 
+.price-input {
+    display: flex;
+    align-items: center;
+}
+
+.price-input input {
+    width: 100px;
+    padding-right: 20px;
+}
+
+.price-input span {
+    margin-left: 5px;
+}
+
 .buttonWrapper{
 	display: flex;
 	justify-content: center;
