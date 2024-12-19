@@ -52,9 +52,18 @@ function bookCreate() {
 		alert("희망 가격을 입력해주세요");
 		form.desiredPrice.focus();
 		return false;
+	} else if (isNaN(form.desiredPrice.value)) {
+	    alert("희망 가격은 숫자로 입력해주세요");
+	    form.desiredPrice.focus();
+	    return false;
 	}
 	
 	form.submit();
+}
+
+function cancelForm() {
+    // 마이페이지로 리다이렉트
+    window.location.href = '/user/myPage';
 }
 </script>
 </head>
@@ -63,13 +72,18 @@ function bookCreate() {
 	<nav>
 		<ul class="header">
 			<div class="left">
-				<li><a href="index.html">Main</a></li>
-				<li><a href="itemlist.html">BookList</a></li>
+				<li><a href="<c:url value='/user/main'></c:url>">Main</a></li>
+				<li><a href="<c:url value='/book/list'></c:url>">BookList</a></li>
             </div>
 			<div class="right">
-				<li><a href="signup.html">SignUp</a></li>
-				<li><a href="login.html">Login</a></li>
-				<li><a href="login.html">MyPage</a></li>
+				<!-- 회원가입 & 로그인 안했을 시  -->
+				<% if(session.getAttribute("customerId") == null) { %>
+					<li><a href="<c:url value='/user/signup'></c:url>">SignUp</a></li>
+					<li><a href="<c:url value='/user/login'></c:url>">Login</a></li>
+				<% } else { %> 
+					<li><a href="<c:url value='/user/logout'></c:url>">Logout</a></li>
+				<%} %>
+					<li><a href="<c:url value='/user/myPage'></c:url>">MyPage</a></li>
 				
 			</div>
 		</ul>
@@ -136,12 +150,15 @@ function bookCreate() {
 		<tr>
 			<td>희망 가격</td>
 			<td>
-				<input type="text" name="desiredPrice"/>
+				<div class="price-input">
+					<input type="text" name="desiredPrice"/>
+					<span>원</span>
+				</div>
 			</td>
 		</tr>
 	</table>
 	<div class="buttonWrapper">
-		<input type="button" value="취소" />
+		<input type="button" value="취소" onClick="cancleForm()" />
 		<input type="button" value="등록" onClick="bookCreate()" />
 	</div>
 </form>
