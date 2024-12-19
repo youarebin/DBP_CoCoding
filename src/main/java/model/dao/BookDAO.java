@@ -22,16 +22,15 @@ public class BookDAO {
 
         try {
             // Book 테이블에 삽입
-            String sql = "INSERT INTO Book (bookId, bookTitle, category, author, publisher, publishedDate, "
+            String sql = "INSERT INTO Book (bookTitle, category, author, publisher, publishedDate, "
                     + "bookImg, customerId, desiredLocation, desiredPrice, usagePeriod) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             Object[] bookParams = new Object[] {
-                book.getBookId(),
                 book.getBookTitle(),
                 book.getCategory(),
                 book.getAuthor(),
                 book.getPublisher(),
-                book.getPublishedDate(),
+                new java.sql.Date(book.getPublishedDate().getTime()),
                 book.getBookImg(),
                 book.getCustomerId(),
                 book.getDesiredLocation(),
