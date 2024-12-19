@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+}
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #FF7012;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+ul.header {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    gap: 40px;
+}
+
+.left li, .right li {
+    display: inline-block;
+}
+
+.left a, .right a {
+    color: #000000; 
+    text-decoration: none;
+    font-size: 40px;
+    padding: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: underline; 
+}
+
+@media (max-width: 800px) {
+    nav {
+        padding: 20px 3%;
+    }
+
+    nav a {
+        font-size: 30px;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px; /* 헤더의 높이만큼 여백 추가 */
+}
+
+h2 {
+    margin: 20px 0; /* 제목 상하 여백 추가 */
+}
+
+table {
+    width: 100%; /* 테이블 너비 100% */
+    border-collapse: collapse; /* 테이블 경계선 합치기 */
+}
+
+th, td {
+    border: 1px solid #ccc; /* 셀 경계선 */
+    padding: 8px; /* 셀 안쪽 여백 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+th {
+    background-color: #f0f0f0; 
+}
