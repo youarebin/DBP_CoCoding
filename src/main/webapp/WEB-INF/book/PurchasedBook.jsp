@@ -4,7 +4,7 @@
  <head>
     <meta charset="UTF-8">
     <title>구매한 책 리스트</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="purchasedbookList.css">
 </head>
 <body>
   <nav class="header">
