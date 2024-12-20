@@ -26,8 +26,8 @@ public class RegisterUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Register.jsp를 보여주는 코드
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/Register.jsp");
+        // RegisterForm.jsp를 보여주는 코드
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/RegisterForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -80,13 +80,13 @@ public class RegisterUserController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/my_page/Main.jsp?success=register");
             } else {
                 request.setAttribute("error", "이미 존재하는 이메일입니다.");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/Register.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/RegisterForm.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "서버 오류가 발생했습니다. 다시 시도해주세요.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/Register.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/RegisterForm.jsp");
             dispatcher.forward(request, response);
         }
     }
