@@ -18,12 +18,11 @@
 				<!-- 회원가입 & 로그인 안했을 시  -->
 				<% if(session.getAttribute("customerId") == null) { %>
 					<li><a href="<c:url value='/user/register'></c:url>">SignUp</a></li>
-					<li><a href="<c:url value='/user/login'></c:url>">Login</a></li>
+					<li><a href="<c:url value='/login'></c:url>">Login</a></li>
 				<% } else { %> 
 					<li><a href="<c:url value='/user/logout'></c:url>">Logout</a></li>
-				<%} %>
 					<li><a href="<c:url value='/user/myPage'></c:url>">MyPage</a></li>
-				
+				<%} %>
 			</div>
 		</ul>
 	</nav>
@@ -34,7 +33,7 @@
 	<c:forEach var="book" items="${bookList}">
 		<a href="<c:url value='/book/detail'><c:param name='id' value='${book.bookId}'/></c:url>">
 			<div class="book-item">
-				<img src="/upload/${book.bookImg}" alt="${book.bookTitle}" />
+				<img src="<c:url value='/upload/${book.bookImg}'/>" alt="${book.bookTitle}" />
 				<div class="item-content">
 					<div><span class="book-info-bold">제목:</span> ${book.bookTitle }</div>
 					<div><span class="book-info-bold">출판사:</span> ${book.publisher }</div>

@@ -8,7 +8,7 @@ body {
 	align-items: center; /* 수직 중앙 정렬 */
 	height: 100vh; /* 화면 전체 높이 */
 	box-sizing: border-box;
-	padding-top: 80px;
+	padding-top: 200px;
 }
 
 header {
@@ -85,7 +85,7 @@ h2 {
 
 /* 책 이미지 스타일 */
 .book-image img {
-    width: 100%;
+    width: 60%;
     min-width: 300px;
     height: auto;
     display: block;

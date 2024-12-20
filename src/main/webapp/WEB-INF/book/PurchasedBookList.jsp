@@ -21,9 +21,8 @@
 					<li><a href="<c:url value='/user/login'></c:url>">Login</a></li>
 				<% } else { %> 
 					<li><a href="<c:url value='/user/logout'></c:url>">Logout</a></li>
-				<%} %>
 					<li><a href="<c:url value='/user/myPage'></c:url>">MyPage</a></li>
-				
+				<%} %>
 			</div>
 		</ul>
 	</nav>

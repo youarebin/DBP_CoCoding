@@ -27,7 +27,7 @@ public class RegisterUserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // RegisterForm.jsp를 보여주는 코드
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/RegisterForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/RegisterForm.jsp");
         dispatcher.forward(request, response);
     }
 
