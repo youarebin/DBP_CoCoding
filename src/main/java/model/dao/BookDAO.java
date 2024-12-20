@@ -8,6 +8,7 @@ import java.util.Date;
 
 import model.domain.Book;
 import model.domain.BookApplicant;
+import model.dto.BookDTO;
 
 public class BookDAO {
     private JDBCUtil jdbcUtil = null;
@@ -22,15 +23,16 @@ public class BookDAO {
 
         try {
             // Book 테이블에 삽입
-            String sql = "INSERT INTO Book (bookTitle, category, author, publisher, publishedDate, "
+            String sql = "INSERT INTO Book (bookId, bookTitle, category, author, publisher, publishedDate, "
                     + "bookImg, customerId, desiredLocation, desiredPrice, usagePeriod) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             Object[] bookParams = new Object[] {
+                book.getBookId(),
                 book.getBookTitle(),
                 book.getCategory(),
                 book.getAuthor(),
                 book.getPublisher(),
-                new java.sql.Date(book.getPublishedDate().getTime()),
+                book.getPublishedDate(),
                 book.getBookImg(),
                 book.getCustomerId(),
                 book.getDesiredLocation(),
@@ -265,74 +267,6 @@ public class BookDAO {
 
         return result;
     }
-    
-    //구매한 책 리스트 가져오기
-    public List<Book> getPurchasedBookList(int customerId) {
-        String query = "SELECT b.* " +
-                       "FROM Book b " +
-                       "JOIN BookApplicant ba ON b.bookId = ba.bookId " +
-                       "WHERE ba.customerId = ?";
-
-        jdbcUtil.setSqlAndParameters(query, new Object[]{customerId});
-        
-        List<Book> purchasedBookList = new ArrayList<>();
-        try {
-            ResultSet rs = jdbcUtil.executeQuery();
-            while (rs.next()) {
-                Book book = new Book(           // Book 객체를 생성하여 현재 행의 정보를 저장
-                        rs.getInt("bookId"),
-                        rs.getString("bookTitle"),
-                        rs.getString("category"),
-                        rs.getString("author"),
-                        rs.getString("publisher"),
-                        rs.getDate("publishedDate"), 
-                        rs.getString("bookImg"),
-                        rs.getInt("customerId"),
-                        rs.getString("desiredLocation"),
-                        rs.getString("desiredPrice"),
-                        rs.getString("usagePeriod") );
-                purchasedBookList.add(book);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // 로깅 또는 예외 처리 추가 가능
-        } finally {
-            jdbcUtil.close();
-        }
-        return purchasedBookList; // null 대신 빈 리스트 반환
-    }
-    
-    //판매(등록)한 책 리스트 가져오기
-    public List<Book> getSoldBookList(int customerId) {
-        String query = "SELECT * FROM Book WHERE customerId = ?";
-        jdbcUtil.setSqlAndParameters(query, new Object[]{customerId});
-
-        List<Book> soldBookList = new ArrayList<>();
-        try {
-            ResultSet rs = jdbcUtil.executeQuery();
-            while (rs.next()) {
-                Book book = new Book(           // Book 객체를 생성하여 현재 행의 정보를 저장
-                        rs.getInt("bookId"),
-                        rs.getString("bookTitle"),
-                        rs.getString("category"),
-                        rs.getString("author"),
-                        rs.getString("publisher"),
-                        rs.getDate("publishedDate"), 
-                        rs.getString("bookImg"),
-                        rs.getInt("customerId"),
-                        rs.getString("desiredLocation"),
-                        rs.getString("desiredPrice"),
-                        rs.getString("usagePeriod") );
-                soldBookList.add(book);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // 로깅 또는 예외 처리 추가 가능
-        } finally {
-            jdbcUtil.close();
-        }
-        return soldBookList; // null 대신 빈 리스트 반환
-    }
 
     // ResultSet의 현재 행을 Book 객체로 매핑
     private Book mapRowToBook(ResultSet rs) throws SQLException {
@@ -345,5 +279,21 @@ public class BookDAO {
         book.setPublishedDate(rs.getDate("publishedDate"));
         book.setBookImg(rs.getString("bookImg"));
         return book;
+    }
+    
+    public List<BookDTO> getRecommendedBooks() {
+        List<BookDTO> recommendedBooks = new ArrayList<>();
+        recommendedBooks.add(new BookDTO());
+
+        return recommendedBooks;
+    }
+
+    public List<BookDTO> searchBooks(String query) {
+        List<BookDTO> searchResults = new ArrayList<>();
+        if ("책".equalsIgnoreCase(query)) {
+            searchResults.add(new BookDTO());
+        }
+
+        return searchResults;
     }
 }
