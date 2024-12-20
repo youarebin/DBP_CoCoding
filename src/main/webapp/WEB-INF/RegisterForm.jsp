@@ -15,7 +15,7 @@
             <ul class="header">
                 <div class="left">
                     <li><a href="<%= request.getContextPath() %>/Main.jsp">Main</a></li>
-                    <li><a href="<%= request.getContextPath() %>/WEB-INF/book/BookList.jsp">ItemList</a></li>
+                    <li><a href="<%= request.getContextPath() %>/WEB-INF/book/BookList.jsp">BookList</a></li>
                 </div>
                 <div class="right">
                     <li><a href="<%= request.getContextPath() %>/WEB-INF/user/LoginForm.jsp">Login</a></li>
