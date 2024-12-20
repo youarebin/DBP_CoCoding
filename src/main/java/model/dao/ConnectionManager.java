@@ -55,7 +55,7 @@ public class ConnectionManager {
 		} 	   
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
     	Connection conn = null;
     	try {
 			conn = ds.getConnection();
