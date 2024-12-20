@@ -1,11 +1,14 @@
 package model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.domain.User;
+import model.dto.UserDTO;
 import model.domain.Book;
 
 public class UserDAO {
@@ -40,6 +43,21 @@ public class UserDAO {
             jdbcUtil.close();   // resource 반환
         }
         return 0;
+    }
+    
+    public boolean create(UserDTO user) throws Exception {
+        String sql = "INSERT INTO users (name, email, password, phone, nickname, account, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setString(3, user.getPassword());
+            pstmt.setString(4, user.getPhoneNumber());
+            pstmt.setString(5, user.getNickname());
+            pstmt.setString(6, user.getAccount());
+            pstmt.setString(7, user.getProfileImage());
+            return pstmt.executeUpdate() > 0;
+        }
     }
 
     // 회원 정보 수정
