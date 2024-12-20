@@ -22,6 +22,7 @@ public class ApplyBookController implements Controller {
             return "redirect:/user/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
         }
         
+        //POST
         try {
             int bookId = Integer.parseInt(request.getParameter("bookId"));
             

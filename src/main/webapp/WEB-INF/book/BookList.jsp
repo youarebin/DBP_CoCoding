@@ -5,11 +5,6 @@
 <title>책 리스트 페이지</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/bookList.css' />" type="text/css">
-<script>
-function goToDetail() {
-	
-}
-</script>
 </head>
 <body>
 <header>
@@ -22,7 +17,7 @@ function goToDetail() {
 			<div class="right">
 				<!-- 회원가입 & 로그인 안했을 시  -->
 				<% if(session.getAttribute("customerId") == null) { %>
-					<li><a href="<c:url value='/user/signup'></c:url>">SignUp</a></li>
+					<li><a href="<c:url value='/user/register'></c:url>">SignUp</a></li>
 					<li><a href="<c:url value='/user/login'></c:url>">Login</a></li>
 				<% } else { %> 
 					<li><a href="<c:url value='/user/logout'></c:url>">Logout</a></li>

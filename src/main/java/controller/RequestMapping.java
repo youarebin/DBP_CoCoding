@@ -40,10 +40,8 @@ public class RequestMapping {
         //판매한 책 리스트 페이지
         mappings.put("/book/sold/list", new SoldBookListController());
         
-        //신청자 리스트 페이지
-        
-        
-       
+        //책 상세 페이지
+        mappings.put("/book/detail", new BookInfoController());
         
         logger.info("Initialized Request Mapping!");
     }

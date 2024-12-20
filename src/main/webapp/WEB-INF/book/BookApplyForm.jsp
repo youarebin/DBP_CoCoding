@@ -67,7 +67,7 @@ function cancelForm() {
 			<div class="right">
 				<!-- 회원가입 & 로그인 안했을 시  -->
 				<% if(session.getAttribute("customerId") == null) { %>
-					<li><a href="<c:url value='/user/signup'></c:url>">SignUp</a></li>
+					<li><a href="<c:url value='/user/register'></c:url>">SignUp</a></li>
 					<li><a href="<c:url value='/user/login'></c:url>">Login</a></li>
 				<% } else { %> 
 					<li><a href="<c:url value='/user/logout'></c:url>">Logout</a></li>

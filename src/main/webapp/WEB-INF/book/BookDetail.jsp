@@ -2,61 +2,59 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.domain.Book" %>
 <%@page import="model.dao.BookDAO" %>
-<%
-    String bookIdStr = request.getParameter("id");
-    int bookId = Integer.parseInt(bookIdStr);
-
-    BookDAO bookDAO = new BookDAO();
-    Book book = bookDAO.getBookInfo(bookId); 
-%>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
     <title>책 정보 상세 페이지</title>
-    <link rel="stylesheet" href="bookDetail.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel=stylesheet href="<c:url value='/css/bookDetail.css' />" type="text/css">
 </head>
 <body>
-<nav class="header">
-    <a href="main.jsp">Main</a>
-    <a href="bookList.jsp">Book</a>
-    <a href="JoinForm.jsp">SignUp</a>
-    <a href="loginForm.jsp">Login</a>
-    <a href="myPage.jsp">MyPage</a>
-</nav>
 <header>
-    <h2>책 정보 상세 페이지</h2>
+	<nav>
+		<ul class="header">
+			<div class="left">
+				<li><a href="<c:url value='/user/main'></c:url>">Main</a></li>
+				<li><a href="<c:url value='/book/list'></c:url>">BookList</a></li>
+            </div>
+			<div class="right">
+				<!-- 회원가입 & 로그인 안했을 시  -->
+				<% if(session.getAttribute("customerId") == null) { %>
+					<li><a href="<c:url value='/user/signup'></c:url>">SignUp</a></li>
+					<li><a href="<c:url value='/user/login'></c:url>">Login</a></li>
+				<% } else { %> 
+					<li><a href="<c:url value='/user/logout'></c:url>">Logout</a></li>
+				<%} %>
+					<li><a href="<c:url value='/user/myPage'></c:url>">MyPage</a></li>
+				
+			</div>
+		</ul>
+	</nav>
 </header>
-
+<h2>책 정보 상세 페이지</h2>
 <div class="container">
     <div class="book-detail">
         <div class="book-image">
-            <img src="${book.bookImg}" alt="책 사진" />
+            <img src="${bookDetail.bookImg}" alt="책 사진" />
         </div>
         <div class="book-info">
-            <h2>${book.bookTitle}</h2>
-            <p>출판사: ${book.publisher}</p>
-            <p>저자: ${book.author}</p>
-            <p>카테고리: ${book.category}</p>
-            <p>사용 기간: ${book.usagePeriod}</p>
-            <p>출판일: ${book.publishedDate}</p>
+            <h2>${bookDetail.bookTitle}</h2>
+            <p><span class="bold">출판사:</span> ${bookDetail.publisher}</p>
+            <p><span class="bold">저자:</span> ${bookDetail.author}</p>
+            <p><span class="bold">카테고리:</span> ${bookDetail.category}</p>
+            <p><span class="bold">사용 기간:</span> ${bookDetail.usagePeriod}</p>
+            <p><span class="bold">출판일:</span> ${bookDetail.publishedDate}</p>
         </div>
     </div>
-
+    
     <hr>
 
     <div class="trade-info">
-        <label for="location">거래희망 장소:</label>
-        <input type="text" id="location" name="location" />
-
-        <label for="price">희망 가격:</label>
-        <input type="text" id="price" name="price" />
-
-        <label for="notes">기타내용:</label>
-        <textarea id="notes" name="notes"></textarea>
+        <div><span class="bold">거래 희망 장소:</span> ${bookDetail.desiredLocation}</div>
+        <div><span class="bold">가격:</span> ${bookDetail.desiredPrice}</div>
     </div>
 
     <div class="apply-button">
-        <form action="BookApplyForm.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/book/apply/form" method="get">
             <input type="submit" value="신청하기" />
         </form>
     </div>

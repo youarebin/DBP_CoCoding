@@ -1,28 +1,35 @@
 package controller.book;
 
-import model.dao.BookDAO;
 import model.domain.Book;
+import model.service.BookManager;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/BookInfoController")
-public class BookInfoController extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String bookId = request.getParameter("bookId");
+import controller.Controller;
+
+public class BookInfoController implements Controller {
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
-        BookDAO bookDAO = new BookDAO();
-        Book book = bookDAO.getBookById(bookId);
+        BookManager bookMgr = BookManager.getInstance();
+        
+        int bookId = Integer.parseInt(request.getParameter("id"));
+      
+        try {
+            Book bookDetail = bookMgr.getBookDetail(bookId);
+            
+            if(bookDetail.getBookImg() == null || bookDetail.getBookImg().isEmpty()) {
+                bookDetail.setBookImg("images/noimage.png");
+            }
 
-        if (book != null) {
-            request.setAttribute("book", book);
-            request.getRequestDispatcher("BookInfo.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("errorPage.jsp");
+            request.setAttribute("bookDetail", bookDetail);
+            return "/book/BookDetail.jsp";
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "오류가 발생했습니다: " + e.getMessage());
+            return "/book/list.jsp";
         }
     }
+    
 }

@@ -38,6 +38,9 @@
 			<input type="submit" value="정보 수정" class="btn1" />
 		</form>
 	</div>
+	
+	<hr>
+	
 	<div class="content">
 		<div class="transactionTitle">거래 내역</div>
 		<div class="btnWrapper2">

@@ -155,18 +155,31 @@ public class BookDAO {
     public Book getBookInfo(int bookId) {
         String query = "SELECT * FROM Book WHERE bookId = ?";
         jdbcUtil.setSqlAndParameters(query, new Object[]{bookId});
+        Book book = null;
         
         try {
             ResultSet rs = jdbcUtil.executeQuery();
-            if (rs.next()) {
-                return mapRowToBook(rs);
+            if (rs.next()) { // 첫 번째 결과가 있으면
+                book = new Book(
+                        rs.getInt("bookId"),
+                        rs.getString("bookTitle"),
+                        rs.getString("category"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getDate("publishedDate"),
+                        rs.getString("bookImg"),
+                        rs.getInt("customerId"),
+                        rs.getString("desiredLocation"),
+                        rs.getString("desiredPrice"),
+                        rs.getString("usagePeriod")
+                );
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             jdbcUtil.close();
         }
-        return null;
+        return book;
     }
 
     // 가격 범위에 따라 책 리스트 반환

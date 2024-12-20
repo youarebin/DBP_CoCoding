@@ -39,12 +39,4 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	<servlet>
-	    <servlet-name>RegisterUserController</servlet-name>
-	    <servlet-class>controller.RegisterUserController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-	    <servlet-name>RegisterUserController</servlet-name>
-	    <url-pattern>/user/register</url-pattern>
-	</servlet-mapping>
 </web-app>

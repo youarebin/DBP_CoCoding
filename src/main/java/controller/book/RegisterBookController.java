@@ -10,17 +10,20 @@ import java.text.SimpleDateFormat;
 import controller.Controller;
 import model.dao.BookDAO;
 import model.domain.Book;
+import model.service.BookManager;
 
 public class RegisterBookController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 현재 세션에서 사용자 정보 가져오기
-        HttpSession session = request.getSession();
-        Integer customerId = (Integer) session.getAttribute("customerId");
         
-        if (customerId == null) {
-            return "redirect:/user/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-        }
+        BookManager bookMgr = BookManager.getInstance();
+        // 현재 세션에서 사용자 정보 가져오기
+//        HttpSession session = request.getSession();
+//        Integer customerId = (Integer) session.getAttribute("customerId");
+//        
+//        if (customerId == null) {
+//            return "redirect:/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+//        }
         
         
         try {
@@ -44,8 +47,7 @@ public class RegisterBookController implements Controller {
             book.setDesiredPrice(request.getParameter("desiredPrice"));
             book.setUsagePeriod(request.getParameter("usagePeriod"));
             
-            BookDAO bookDAO = new BookDAO();
-            int result = bookDAO.create(book);
+            int result = bookMgr.createBook(book);
             
             if (result > 0) { // 성공 시 마이페이지로 리다이렉트
                 return "redirect:/user/myPage"; 
