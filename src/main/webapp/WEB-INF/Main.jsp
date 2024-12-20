@@ -1,34 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>메인 페이지</title>
-    <link rel="stylesheet" href="css/mainPage.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/mainPage.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="Main.jsp">홈</a></li>
-                <li><a href="BookList.jsp">책 목록</a></li>
-                <li><a href="LoginForm.jsp">로그인</a></li>
+            <ul class="header">
+                <div class="left">
+                    <li><a href="<%= request.getContextPath() %>/Main.jsp">Main</a></li>
+                    <li><a href="<%= request.getContextPath() %>/WEB-INF/book/BookList.jsp">ItemList</a></li>
+                </div>
+                <div class="right">
+                    <li><a href="<%= request.getContextPath() %>/WEB-INF/user/LoginForm.jsp">Login</a></li>
+                    <li><a href="<%= request.getContextPath() %>/WEB-INF/user/Register.jsp">SignUp</a></li>
+                </div>
             </ul>
         </nav>
     </header>
-    <h1>${user.nickname}님 환영합니다!</h1>
-    <form action="/search" method="get">
-        <input type="text" name="search" placeholder="책 제목을 검색하세요">
-        <button type="submit">검색</button>
-    </form>
-    <div>
-        <h2>추천 책 목록</h2>
-        <!-- 책 리스트 동적 출력 -->
-        <c:forEach var="book" items="${bookList}">
-            <div>
-                <h3>${book.title}</h3>
-                <p>${book.author}</p>
+
+    <main>
+        <section class="welcome">
+            <h1>OOO님 환영합니다!</h1>
+        </section>
+
+        <section class="search">
+            <h2>찾는 책을 검색하세요</h2>
+            <form action="<%= request.getContextPath() %>/book/search" method="get" class="search-form">
+                <input type="text" name="query" placeholder="책 제목" required>
+                <button type="submit">검색</button>
+            </form>
+        </section>
+
+        <section class="popular-books">
+            <h2>추천 도서</h2>
+            <div class="book-list">
+                <div class="book-item">책 1</div>
+                <div class="book-item">책 2</div>
+                <div class="book-item">책 3</div>
+                <div class="book-item">책 4</div>
             </div>
-        </c:forEach>
-    </div>
+        </section>
+    </main>
 </body>
 </html>
