@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import model.dao.UserDAO;
 import model.dto.UserDTO;
