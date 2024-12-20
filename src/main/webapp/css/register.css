@@ -1,54 +1,147 @@
+/* 공통 스타일 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding-top: 113px; /* 헤더 공간 확보 */
 }
 
-form {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 300px;
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #FF7012; /* 헤더 배경색 */
+    z-index: 1000;
 }
 
-form h1 {
+main {
     text-align: center;
-    color: #333;
+}
+
+.form-container {
+    border: 2px solid #FF7012; 
+    border-radius: 10px; 
+    padding: 20px; 
+    background-color: white; 
+    max-width: 600px; 
+    margin: 50px auto; 
+}
+
+/* 네비게이션 스타일 */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+ul.header {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    gap: 40px;
+}
+
+.left li, .right li {
+    display: inline-block;
+}
+
+.left a, .right a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #FF7012;
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    background-color: #FF9436;
+    color: black;
+    font-size: 20px;
+    width: 40%; 
+    font-weight: bold;
+}
+
+/* 입력 폼 스타일 */
+.signup-form {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.form-group {
     margin-bottom: 20px;
 }
 
-label {
+.form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 5px;
 }
 
-input {
-    width: 100%;
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%; 
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
+    border: 2px solid #FF7012;
+    border-radius: 5px;
     box-sizing: border-box;
 }
 
-button {
-    width: 100%;
+/* 인풋 그룹 스타일 */
+.input-group {
+    display: flex; 
+    align-items: center; 
+    margin-top: 10px; 
+}
+
+.input-group input,
+.input-group select {
+    flex: 1; 
+    margin-right: 5px;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
+    border: 2px solid #FF7012;
+    border-radius: 5px;
+}
+
+.input-group span {
+    margin: 0 5px;
+}
+
+.input-group button {
+    padding: 10px 15px; 
+    background-color: #FF9436;
+    color: black; 
+    border: none; 
+    border-radius: 5px; 
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+/* 이미지 미리보기 스타일 */
+.image-preview {
+    width: 150px; 
+    height: auto; 
+    margin-top: 10px; 
 }
