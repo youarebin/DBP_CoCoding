@@ -77,7 +77,7 @@ public class RegisterUserController extends HttpServlet {
 
             // 처리 결과에 따른 리다이렉트
             if (isRegistered) {
-                response.sendRedirect(request.getContextPath() + "/my_page/Main.jsp?success=register");
+                response.sendRedirect(request.getContextPath() + "/Main.jsp?success=register");
             } else {
                 request.setAttribute("error", "이미 존재하는 이메일입니다.");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/RegisterForm.jsp");
