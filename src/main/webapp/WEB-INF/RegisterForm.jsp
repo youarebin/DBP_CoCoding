@@ -19,7 +19,7 @@
                 </div>
                 <div class="right">
                     <li><a href="<%= request.getContextPath() %>/WEB-INF/user/LoginForm.jsp">Login</a></li>
-                    <li><a href="<%= request.getContextPath() %>/WEB-INF/user/Register.jsp">SignUp</a></li>
+                    <li><a href="<%= request.getContextPath() %>/WEB-INF/user/RegisterForm.jsp">SignUp</a></li>
                 </div>
             </ul>
         </nav>
