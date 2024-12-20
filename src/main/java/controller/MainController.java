@@ -2,6 +2,7 @@ package controller;
 
 import model.dto.BookDTO;
 import model.dao.BookDAO;
+import model.domain.Book;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class MainController {
         }
 
         // 검색 결과 가져오기
-        List<BookDTO> searchResults = bookDAO.searchBooks(query);
+        List<Book> searchResults = bookDAO.searchBook(query);
         request.setAttribute("searchResults", searchResults);
 
         // 검색 결과를 표시하는 페이지로 이동
