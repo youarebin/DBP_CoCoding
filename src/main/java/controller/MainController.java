@@ -27,7 +27,7 @@ public class MainController {
         request.setAttribute("recommendedBooks", recommendedBooks);
 
         // Main 페이지로 이동
-        return "/WEB-INF/user/Main.jsp";
+        return "/WEB-INF/Main.jsp";
     }
 
     public String searchBooks(HttpServletRequest request, HttpServletResponse response) {
