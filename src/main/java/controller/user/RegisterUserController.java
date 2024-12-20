@@ -3,6 +3,7 @@ package controller;
 import model.dao.UserDAO;
 import model.dto.UserDTO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,14 @@ import java.io.IOException;
 )
 public class RegisterUserController extends HttpServlet {
     private static final String UPLOAD_DIR = "profile_images";
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Register.jsp를 보여주는 코드
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/Register.jsp");
+        dispatcher.forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -45,12 +54,11 @@ public class RegisterUserController extends HttpServlet {
         }
 
         // 파일 저장
+        String profileImagePath = null;
         if (fileName != null && !fileName.isEmpty()) {
             filePart.write(uploadPath + File.separator + fileName);
+            profileImagePath = UPLOAD_DIR + "/" + fileName;
         }
-
-        // 저장된 프로필 이미지 경로
-        String profileImagePath = UPLOAD_DIR + "/" + fileName;
 
         // DTO 객체 생성
         UserDTO user = new UserDTO();
@@ -69,13 +77,17 @@ public class RegisterUserController extends HttpServlet {
 
             // 처리 결과에 따른 리다이렉트
             if (isRegistered) {
-                response.sendRedirect("../../my_page/Main.jsp?success=register");
+                response.sendRedirect(request.getContextPath() + "/my_page/Main.jsp?success=register");
             } else {
-                response.sendRedirect("Register.jsp?error=true");
+                request.setAttribute("error", "이미 존재하는 이메일입니다.");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/Register.jsp");
+                dispatcher.forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("Register.jsp?error=exception");
+            request.setAttribute("error", "서버 오류가 발생했습니다. 다시 시도해주세요.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/Register.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
