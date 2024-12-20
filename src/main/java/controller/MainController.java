@@ -35,7 +35,7 @@ public class MainController {
 
         if (query == null || query.trim().isEmpty()) {
             request.setAttribute("error", "검색어를 입력해주세요.");
-            return "/WEB-INF/user/Main.jsp"; // 에러 메시지와 함께 메인 페이지로 이동
+            return "/WEB-INF/Main.jsp"; // 에러 메시지와 함께 메인 페이지로 이동
         }
 
         // 검색 결과 가져오기
